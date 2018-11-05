@@ -9,6 +9,7 @@ import ChatHistory from './ChatHistory';
 import ListUsers from './ListUser';
 import MessageInput from './MessageInput';
 import Search from './Search';
+import {logOut,setStatus} from '../../store/Actions/Actions'
 
 class Messenger extends Component {
 
@@ -20,17 +21,21 @@ class Messenger extends Component {
         if(localStorage.getItem("logged in") === false){
             this.props.history.push("/");
         }
+        else {
+            this.props.setStatus();    
+        }
     }
 
     handleLogOut() {
+        this.props.handleLogOut();
         this.props.firebase.logout();
         localStorage.setItem("logged in","false");
     }
     render() {
         return (
             <div>
-                <h3>Messenger</h3>
-                <h4>Hello, {this.props.auth.displayName}</h4>
+                <h2>Messenger</h2>
+                <h3>Hello, {this.props.auth.displayName}</h3>
                 <button onClick={() => this.handleLogOut()} >Log Out</button>
                 <div class="container clearfix">
                     <div class="people-list" id="people-list">
@@ -53,7 +58,24 @@ Messenger.propTypes = {
     }),
     auth: PropTypes.object,
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleLogOut: ()=>{
+            dispatch(logOut())
+        },
+        setStatus: () => {
+            dispatch(setStatus())
+        },
+    }
+}
+const mapStateToProps = (state) => {
+    return{
+        auth: state.firebase.auth,
+        uid: state.firebase.auth.uid,
+    }
+};
+
 export default compose(
     firebaseConnect(), // withFirebase can also be used
-    connect(({ firebase: { auth } }) => ({ auth }))
+    connect(mapStateToProps,mapDispatchToProps)
 )(Messenger);
