@@ -17,7 +17,7 @@ const firebaseConfig = {
 const config = {
     userProfile: 'users', // firebase root where user profiles are stored
     attachAuthIsReady: true, // attaches auth is ready promise to store
-  firebaseStateName: 'firebase' // should match the reducer name ('firebase' is default)    
+    firebaseStateName: 'firebase' // should match the reducer name ('firebase' is default)    
 }
 
 

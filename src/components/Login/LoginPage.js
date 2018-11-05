@@ -9,19 +9,16 @@ class LoginPage extends Component {
   componentDidUpdate() {
     if (!isEmpty(this.props.auth)) {
       this.props.history.push("/messenger");
+      localStorage.setItem('logged in',"true");
     }
   }
   render() {
 
     return (
       <div className="container">
-        <div>
-          <div className="btn" >
+          <div className="btn" style={{margin: '100px auto'}} >
             <GoogleButton onClick={() => this.props.firebase.login({ provider: 'google', type: 'popup' })} />
-
           </div>
-          <h2>Please Sign In </h2>
-        </div>
       </div>
     );
   }
