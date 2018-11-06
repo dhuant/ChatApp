@@ -9,43 +9,50 @@ import ChatHistory from './ChatHistory';
 import ListUsers from './ListUser';
 import MessageInput from './MessageInput';
 import Search from './Search';
-import {logOut,setStatus} from '../../store/Actions/Actions'
-
+import { logOut, setStatus } from '../../store/Actions/auth';
+import { getUserFromFirebase } from '../../store/Actions/user';
+import { withRouter } from 'react-router-dom';
 class Messenger extends Component {
 
     componentWillReceiveProps() {
-        if (localStorage.getItem("logged in") !== "true")
-             this.props.history.push('/');
+        if (localStorage.getItem("logged in") !== 'true') {
+            this.props.history.push('/');
+        }
     }
-    componentWillMount(){
-        if(localStorage.getItem("logged in") === false){
-            this.props.history.push("/");
+    componentWillMount() {
+        if (localStorage.getItem("logged in") === 'false') {
+            this.props.history.push('/');
         }
         else {
-            this.props.setStatus();    
+            this.props.setStatus();
+            this.props.getUserFromFirebase(this.props.match.params.id);
         }
     }
-
     handleLogOut() {
         this.props.handleLogOut();
         this.props.firebase.logout();
-        localStorage.setItem("logged in","false");
+        localStorage.setItem("logged in", "false");
     }
     render() {
         return (
             <div>
-                <h2>Messenger</h2>
-                <h3>Hello, {this.props.auth.displayName}</h3>
-                <button onClick={() => this.handleLogOut()} >Log Out</button>
+                <div>
+                    <h2 style={{ color: 'Black' }}>Messenger</h2>
+                    <h3 style={{ color: 'Black' }}>Hello, {this.props.auth.displayName}</h3>
+                    {/* <h3 style={{ color: 'Black' }}>Hello, {this.props.auth.uid}</h3> */}
+                </div>
                 <div class="container clearfix">
+                    <button className="float-right" style={{ height: '40px', width: '40px' }} onClick={() => this.handleLogOut()} >
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
                     <div class="people-list" id="people-list">
-                        <Search/>
-                        <ListUsers/>
+                        <Search />
+                        <ListUsers />
                     </div>
                     <div class="chat">
-                        <ChatHeader/>
-                        <ChatHistory/>
-                        <MessageInput/>
+                        <ChatHeader />
+                        <ChatHistory />
+                        <MessageInput />
                     </div>
                 </div>
             </div>
@@ -60,22 +67,29 @@ Messenger.propTypes = {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleLogOut: ()=>{
+        handleLogOut: () => {
             dispatch(logOut())
         },
         setStatus: () => {
             dispatch(setStatus())
         },
+        getUserFromFirebase: (uid) => {
+            dispatch(getUserFromFirebase(uid))
+        }
     }
 }
 const mapStateToProps = (state) => {
-    return{
-        auth: state.firebase.auth,
-        uid: state.firebase.auth.uid,
+    return {
+        auth: state.firebase.auth
     }
 };
 
+
 export default compose(
     firebaseConnect(), // withFirebase can also be used
-    connect(mapStateToProps,mapDispatchToProps)
+    withRouter,connect(mapStateToProps, mapDispatchToProps)
 )(Messenger);
+// export default compose(
+//     firebaseConnect(), // withFirebase can also be used
+//     withRouter,connect(mapStateToProps,mapDispatchToProps)
+// )(Messenger);

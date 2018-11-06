@@ -3,21 +3,23 @@ import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
-import GoogleButton from 'react-google-button'; // optional;
+import GoogleButton from 'react-google-button';
+import {withRouter} from 'react-router-dom';
 
 class LoginPage extends Component {
   componentDidUpdate() {
     if (!isEmpty(this.props.auth)) {
-      this.props.history.push("/messenger");
-      localStorage.setItem('logged in',"true");
+      console.log(this.props.auth.uid);     
+      this.props.history.push(`/messenger/${this.props.auth.uid}`);
+      localStorage.setItem('logged in',"true"); 
     }
   }
   render() {
 
     return (
-      <div className="container">
-          <div className="btn" style={{margin: '100px auto'}} >
-            <GoogleButton onClick={() => this.props.firebase.login({ provider: 'google', type: 'popup' })} />
+      <div className="container" style={{width: '15%'}}>
+          <div style={{margin: '100px auto'}} >
+          <GoogleButton onClick={() => this.props.firebase.login({ provider: 'google', type: 'popup' })} />
           </div>
       </div>
     );
@@ -30,6 +32,6 @@ LoginPage.propTypes = {
   auth: PropTypes.object,
 }
 export default compose(
-  firebaseConnect(), // withFirebase can also be used
+  firebaseConnect(),withRouter,
   connect(({ firebase: { auth } }) => ({ auth }))
 )(LoginPage)

@@ -56,6 +56,13 @@ body {
     li {
       padding-bottom: 20px;
       list-style-type: none;
+
+      .name {
+        &:hover {
+          color: orange;
+          cursor: pointer;
+        }
+      }
     }
   }
   
@@ -95,9 +102,10 @@ body {
   .chat-header {
     padding: 20px;
     border-bottom: 2px solid white;
-    
+ 
     img {
       float: left;
+      border-radius:50%;
     }
     
     .chat-about {

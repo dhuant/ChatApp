@@ -26,7 +26,7 @@ class ChatHistory extends Component {
                     <li class="clearfix">
                         <div class="message-data align-right">
                             <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-                                        <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+                            <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
                         </div>
                         <div class="message other-message float-right">
                             Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?

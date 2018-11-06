@@ -6,7 +6,6 @@ import { firebaseConnect } from 'react-redux-firebase';
 class ListUser extends Component {
     render() {
         let users = this.props.users.ordered.users;
-        console.log(users);
 
         let listUsers = '';
         if (users) {
