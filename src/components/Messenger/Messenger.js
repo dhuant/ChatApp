@@ -20,6 +20,7 @@ class Messenger extends Component {
         }
     }
     componentWillMount() {
+        
         if (localStorage.getItem("logged in") === 'false') {
             this.props.history.push('/');
         }
@@ -28,12 +29,19 @@ class Messenger extends Component {
             this.props.getUserFromFirebase(this.props.match.params.id);
         }
     }
+    componentDidMount(){
+        console.log(this.props.auth.displayName);
+        
+    }
     handleLogOut() {
         this.props.handleLogOut();
         this.props.firebase.logout();
         localStorage.setItem("logged in", "false");
     }
     render() {
+        console.log('render');
+        console.log(this.props.auth.displayName);
+        
         return (
             <div>
                 <div>
@@ -51,8 +59,8 @@ class Messenger extends Component {
                     </div>
                     <div class="chat">
                         <ChatHeader />
-                        <ChatHistory />
-                        <MessageInput />
+                        <ChatHistory  idSender= {this.props.auth.uid} idReceiver = {this.props.match.params.id}/>
+                        <MessageInput auth= {this.props.auth} idReceiver = {this.props.match.params.id} />
                     </div>
                 </div>
             </div>
