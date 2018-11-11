@@ -22,6 +22,7 @@ class Message extends Component {
                 )
             })
         }
+        let img = <img src={message.imgUrl}/>;
         // console.log(parts);
         if (message.liClass) {
             return (
@@ -33,6 +34,7 @@ class Message extends Component {
                     </div>
                     <div className="message my-message float-right">
                         {message.message}
+                        {img}
                         {links}
                     </div>
                 </li>
@@ -49,6 +51,7 @@ class Message extends Component {
                     </div>
                     <div className="message other-message float-left">
                         {message.message}
+                        {img}
                         {links}
                     </div>
                 </li>
