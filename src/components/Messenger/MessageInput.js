@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {sendMessage} from '../../store/Actions/message'
+import { connect } from 'react-redux';
+import { sendMessage } from '../../store/Actions/message'
 
 class MessageInput extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             message: '',
@@ -17,26 +17,26 @@ class MessageInput extends Component {
         })
     }
     onHanleKey = (e) => {
-        if(e.keyCode === 13){
+        if (e.keyCode === 13) {
             this.onSubmit(e);
         }
-        if( e.keyCode === 16 && e.keyCode===13){
+        if (e.keyCode === 16 && e.keyCode === 13) {
             let str = this.state.message + '\n';
-            this.setState({message: str});
+            this.setState({ message: str });
         }
     }
-    onSubmit = (e) =>{
+    onSubmit = (e) => {
         e.preventDefault();
         const idSender = this.props.auth.uid;
         const idReceiver = this.props.idReceiver;
         const idMessage = (idSender < idReceiver) ? (idSender + idReceiver) : (idReceiver + idSender);
-        if(this.state.message !== ''){
+        if (this.state.message !== '') {
             const item = {
                 message: this.state.message,
                 idSender: idSender,
                 idReceiver: idReceiver,
                 idMessage: idMessage,
-                time: new Date()
+                time: Date.now()
             }
             // console.log(item);
             this.props.sendMessage(item);
@@ -44,17 +44,23 @@ class MessageInput extends Component {
                 message: '',
             })
         }
-        
+
     }
     render() {
         // console.log(this.props.auth);
         // console.log(this.props.idReceiver);
         return (
             <div class="chat-message clearfix">
-                <textarea name="message" value= {this.state.message} onChange={this.onChange} id="message-to-send" placeholder="Type your message" rows="3"></textarea>
+                <textarea name="message" value={this.state.message} onChange={this.onChange} onKeyDown={this.onHanleKey} id="message-to-send" placeholder="Type your message" rows="3"></textarea>
                 <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
                             <i class="fa fa-file-image-o"></i>
+                <div className="inputfile" >
+                    <input type="file" id="file" accept="image/*" ref="fileUploader" onChange={(e) =>
+                        this.handleChosen(e)} />
+                </div>
+
                 <button onClick={this.onSubmit}>Send</button>
+
             </div>
         );
     }

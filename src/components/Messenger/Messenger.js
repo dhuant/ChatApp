@@ -59,7 +59,7 @@ class Messenger extends Component {
                     </div>
                     <div class="chat">
                         <ChatHeader />
-                        <ChatHistory  idSender= {this.props.auth.uid} idReceiver = {this.props.match.params.id}/>
+                        <ChatHistory  auth= {this.props.auth} idReceiver = {this.props.match.params.id}/>
                         <MessageInput auth= {this.props.auth} idReceiver = {this.props.match.params.id} />
                     </div>
                 </div>

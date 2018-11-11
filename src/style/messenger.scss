@@ -134,17 +134,27 @@ body {
   .chat-history {
     padding: 30px 30px 20px;
     border-bottom: 2px solid white;
-    overflow-y: scroll;
+    overflow: auto;
     height: 575px;
     
     .message-data {
       margin-bottom: 15px;
+      img {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+      }
     }
     
     ul {
       li{
         list-style-type: none;
       }
+    }
+    img {
+      height: auto;
+      width: 220px;
+      display: inherit
     }
     .message-data-time {
       color: lighten($gray, 8%);
@@ -158,35 +168,38 @@ body {
       font-size: 16px;
       border-radius: 7px;
       margin-bottom: 30px;
-      width: 90%;
+      width: 80%;
       position: relative;
+      overflow-wrap: break-word;
       
-      &:after {
-        bottom: 100%;
-        left: 7%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-        border-bottom-color: $green;
-        border-width: 10px;
-        margin-left: -10px;
-      }
+      // &:after {
+      //   bottom: 100%;
+      //   right: 3%;
+      //   border: solid transparent;
+      //   content: " ";
+      //   height: 0;
+      //   width: 0;
+      //   position: absolute;
+      //   pointer-events: none;
+      //   border-bottom-color: $blue;
+      //   border-width: 10px;
+      //   margin-left: -10px;
+      // }
     }
     
     .my-message {
-      background: $green;
+      white-space:pre-wrap;
+      background: $blue;
     }
     
     .other-message {
-      background: $blue;
+      white-space:pre-wrap;
+      background: $green;
       
-      &:after {
-        border-bottom-color: $blue;
-        left: 93%;
-      }
+      // &:after {
+      //   border-bottom-color: $green;
+      //   right: 93%;
+      // }
     }
     
   }
@@ -223,7 +236,7 @@ body {
       background: #F2F5F8;
       
       &:hover {
-        color: darken($blue, 7%);
+        color: darken($orange, 7%);
       }
     }
   }
@@ -239,7 +252,7 @@ body {
 }
   
 .offline {
-  color: $orange;
+  color: $gray;
 }
 
 .me {

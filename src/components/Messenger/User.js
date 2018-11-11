@@ -12,21 +12,26 @@ class User extends Component {
     render() {
         let { user } = this.props;
         let desc = '';
+        let status = '';
         if (user.value.status.online) {
             desc = 'online';
+            status = <i className="fa fa-circle online"></i>
         }
         else {
             let day = moment(user.value.status.lastOnline);
             let lastOnline = moment(day.toDate()).calendar();
             desc = `${lastOnline}`;
+            status = <i className="fa fa-circle offline"></i>
+            
         }
         return (
-            <li class="clearfix">
+            <li className="clearfix">
                 <img src={user.value.avatarUrl} alt="avatar" />
-                <div class="about">
-                    <div class="name" onClick={() => this.onHandleOnClickUser(user.key)}>{user.value.displayName}</div>
-                    <div class="status">
-                        <i className={user.online ? "fa fa-circle online" : "fa fa-circle offline"}></i>
+                <div className="about">
+                    <div className="name" onClick={() => this.onHandleOnClickUser(user.key)}>{user.value.displayName}</div>
+                    <div className="status">
+                        {/* <i className={user.online ? "fa fa-circle online" : "fa fa-circle offline"}></i> */}
+                        {status}
                         {desc}
                     </div>
                 </div>
@@ -47,4 +52,3 @@ const mapStateToProps = (state) => {
     }
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));
-// export default withRouter(User);

@@ -6,25 +6,27 @@ import _ from 'lodash';
 import Message from './Message';
 class ChatHistory extends Component {
     render() {
-        console.log(_.values(this.props.messages));
-        console.log(this.props.messages);
+        // console.log(_.values(this.props.messages));
+        // console.log(this.props.messages);
 
-        console.log(this.props.idSender);
-        console.log(this.props.idReceiver);
-        const idSender = this.props.idSender;
+        // console.log(this.props.idSender);
+        // console.log(this.props.idReceiver);
+        const auth = this.props.auth;
+
+        const idSender = auth.uid;
         const idReceiver = this.props.idReceiver;
         const idMessage = (idSender < idReceiver) ? (idSender + idReceiver) : (idReceiver + idSender);
-        console.log(idMessage)
+        //console.log(idMessage)
         let idx = -1;
         _.values(this.props.messages).forEach((mess, index) => {
-            console.log(_.values(mess)[0].idMessage)
+            //console.log(_.values(mess)[0].idMessage)
             if (idMessage == _.values(mess)[0].idMessage) {
                 idx = index;
             }
         })
 
         const chat = _.values(_.values(this.props.messages)[idx]);
-        console.log(chat)
+        //console.log(chat)
         let list = null;
         if (chat) {
             list = chat.map((message, index) => {
@@ -34,7 +36,7 @@ class ChatHistory extends Component {
                 }
                 message.liClass = liClass;
                 return (
-                    <Message key={index} message={message} />
+                    <Message key={index} message={message} auth = {auth} />
                 )
             })
         }
