@@ -20,7 +20,7 @@ class Messenger extends Component {
         }
     }
     componentWillMount() {
-        
+        console.log(this.props.auth);
         if (localStorage.getItem("logged in") === 'false') {
             this.props.history.push('/');
         }
@@ -29,10 +29,7 @@ class Messenger extends Component {
             this.props.getUserFromFirebase(this.props.match.params.id);
         }
     }
-    componentDidMount(){
-        console.log(this.props.auth.displayName);
-        
-    }
+    
     handleLogOut() {
         this.props.handleLogOut();
         this.props.firebase.logout();

@@ -9,7 +9,7 @@ class Message extends Component {
         // console.log(this.props.message);
         // console.log(`chat with ${this.props.chatHeader.displayName}`)
         const { message } = this.props;
-        const {auth} = this.props;
+        const { auth } = this.props;
         let day = moment(message.time);
         // let time = moment(day.toDate()).calendar();
         let time = moment().format('LT');
@@ -23,11 +23,15 @@ class Message extends Component {
             })
         }
         let imgUrls = message.imgUrl;
-        let imgs = imgUrls.map((imgUrl,index) => {
-            return (
-                <img src={imgUrl} key={index}/>
-            )
-        })
+        let imgs = null;
+        if (imgUrls) {
+            imgs = imgUrls.map((imgUrl, index) => {
+                return (
+                    <img src={imgUrl} key={index} />
+                )
+            })
+        }
+
         // console.log(parts);
         if (message.liClass) {
             return (
