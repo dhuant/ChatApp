@@ -51,7 +51,7 @@ class Messenger extends Component {
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
                     <div class="people-list" id="people-list">
-                        <Search />
+                  
                         <ListUsers />
                     </div>
                     <div class="chat">
