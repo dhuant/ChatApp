@@ -22,7 +22,12 @@ class Message extends Component {
                 )
             })
         }
-        let img = <img src={message.imgUrl}/>;
+        let imgUrls = message.imgUrl;
+        let imgs = imgUrls.map((imgUrl,index) => {
+            return (
+                <img src={imgUrl} key={index}/>
+            )
+        })
         // console.log(parts);
         if (message.liClass) {
             return (
@@ -34,7 +39,7 @@ class Message extends Component {
                     </div>
                     <div className="message my-message float-right">
                         {message.message}
-                        {img}
+                        {imgs}
                         {links}
                     </div>
                 </li>
@@ -51,7 +56,7 @@ class Message extends Component {
                     </div>
                     <div className="message other-message float-left">
                         {message.message}
-                        {img}
+                        {imgs}
                         {links}
                     </div>
                 </li>

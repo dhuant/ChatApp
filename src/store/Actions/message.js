@@ -14,7 +14,7 @@ export const sendMessage = (message) =>
             let storageRef = firebase.storage().ref();
             let promises = [];
             file.forEach(element => {
-                promises.push(storageRef.child('images/' + element.name).put(element, metadata));
+                promises.push(storageRef.child(`images/${element.lastModified}${element.name}`).put(element, metadata));
             });
             Promise.all(promises).then(res => {
                 promises = [];

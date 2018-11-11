@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendMessage } from '../../store/Actions/message'
-
+import { updateLastChatUser } from '../../store/Actions/user'
 class MessageInput extends Component {
     constructor(props) {
         super(props);
@@ -31,6 +31,7 @@ class MessageInput extends Component {
             }
         }
         reader.readAsDataURL(image);
+        e.target.value = null;
     }
     onHanleKey = (e) => {
         if (e.keyCode === 13) {
@@ -55,13 +56,19 @@ class MessageInput extends Component {
                 time: Date.now(),
                 listImgs: this.state.listImages,
             }
+            const id = {
+                idSender: idSender,
+                idReceiver: idReceiver,
+            }
             // console.log(item);
             this.props.sendMessage(item);
+            this.props.updateLastChatUser(id);
             this.setState({
                 message: '',
                 listImages: [],
                 previewImage: [],
             })
+            e.target.value = null;
         }
 
     }
@@ -78,6 +85,8 @@ class MessageInput extends Component {
     }
     render() {
 
+        console.log(this.state.previewImage);
+        console.log(this.state.listImages);
         let listPreviewImgs = this.state.previewImage;
         let listPreImgs = null;
         if (listPreviewImgs.length > 0) {
@@ -101,7 +110,7 @@ class MessageInput extends Component {
                         this.onHandleChooseImage(e)} />
                 </div>
                 {listPreImgs}
-                <button onClick={this.onSubmit}>Send</button>
+                <button onClick={this.onSubmit} >Send</button>
 
             </div>
         );
@@ -109,7 +118,8 @@ class MessageInput extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        sendMessage: (message) => dispatch(sendMessage(message))
+        sendMessage: (message) => dispatch(sendMessage(message)),
+        updateLastChatUser: (id) => dispatch(updateLastChatUser(id))
     }
 }
 const mapStateToProps = (state) => {
