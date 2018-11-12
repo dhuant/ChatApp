@@ -10,7 +10,7 @@ class Message extends Component {
         // console.log(`chat with ${this.props.chatHeader.displayName}`)
         const { message } = this.props;
         const { auth } = this.props;
-        let day = moment(message.time);
+        //let day = moment(message.time);
         // let time = moment(day.toDate()).calendar();
         let time = moment().format('LT');
         let parts = message.message.match(/(https?|ftp:)([^\s]+)/g);

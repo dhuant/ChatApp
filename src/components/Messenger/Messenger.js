@@ -8,7 +8,6 @@ import ChatHeader from './ChatHeader';
 import ChatHistory from './ChatHistory';
 import ListUsers from './ListUser';
 import MessageInput from './MessageInput';
-import Search from './Search';
 import { logOut, setStatus } from '../../store/Actions/auth';
 import { getUserFromFirebase } from '../../store/Actions/user';
 import { withRouter } from 'react-router-dom';

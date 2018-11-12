@@ -34,7 +34,7 @@ export const getUserFromFirebase = (id) =>
                         });
                     }
                     else {
-                        firebase.update(`users/${uid}/priority/${id}`, { isStar: false, lastChat: 0 });
+                        firebase.update(`users/${uid}/priority/${id}`, {idChatWith: `${id}`,isStar: false, lastChat: 0 });
                         firebase.database().ref(`users/${uid}/priority/${id}`).once('value').then(function (snapshot) {
                              priority.isStar = snapshot.val().isStar;
                             const star = snapshot.val().isStar
