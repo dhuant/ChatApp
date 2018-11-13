@@ -9,17 +9,20 @@ import {withRouter} from 'react-router-dom';
 class LoginPage extends Component {
   componentDidUpdate() {
     if (!isEmpty(this.props.auth)) {
-      console.log(this.props.auth.uid);     
+      console.log(this.props.auth.uid); 
+      localStorage.setItem('logged in',"true");     
       this.props.history.push(`/messenger/${this.props.auth.uid}`);
-      localStorage.setItem('logged in',"true"); 
     }
+  }
+  async handleLogIn(){
+    await this.props.firebase.login({ provider: 'google', type: 'popup' });
   }
   render() {
 
     return (
       <div className="container" style={{width: '15%'}}>
           <div style={{margin: '100px auto'}} >
-          <GoogleButton onClick={() => this.props.firebase.login({ provider: 'google', type: 'popup' })} />
+          <GoogleButton onClick={() => this.handleLogIn()} />
           </div>
       </div>
     );

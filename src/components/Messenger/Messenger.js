@@ -19,7 +19,7 @@ class Messenger extends Component {
         }
     }
     componentWillMount() {
-        console.log(this.props.auth);
+        //console.log(this.props.auth);
         if (localStorage.getItem("logged in") === 'false') {
             this.props.history.push('/');
         }
@@ -35,8 +35,8 @@ class Messenger extends Component {
         localStorage.setItem("logged in", "false");
     }
     render() {
-        console.log('render');
-        console.log(this.props.auth.displayName);
+        // console.log('render');
+        // console.log(this.props.auth.displayName);
         
         return (
             <div>
@@ -84,7 +84,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        // users: state.firebase.ordered.users,
     }
 };
 
@@ -93,7 +94,3 @@ export default compose(
     firebaseConnect(), // withFirebase can also be used
     withRouter,connect(mapStateToProps, mapDispatchToProps)
 )(Messenger);
-// export default compose(
-//     firebaseConnect(), // withFirebase can also be used
-//     withRouter,connect(mapStateToProps,mapDispatchToProps)
-// )(Messenger);

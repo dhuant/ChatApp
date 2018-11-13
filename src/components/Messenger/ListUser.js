@@ -62,9 +62,12 @@ class ListUser extends Component {
         let listUsers = '';
         if (users) {
             console.log(users);
-            users = users.filter((user) => {
-                return user.value.displayName.toLowerCase().indexOf(this.state.keyword.toLowerCase()) !== -1;
-            })
+            if (this.state.keyword !== "") {
+                users = users.filter((user) => {
+                    return user.value.displayName.toLowerCase().indexOf(this.state.keyword.toLowerCase()) !== -1;
+                })
+            }
+
             listUsers = users.map((user, index) => {
                 return (
                     <User
