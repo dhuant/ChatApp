@@ -45,15 +45,15 @@ class Messenger extends Component {
                     <h3 style={{ color: 'Black' }}>Hello, {this.props.auth.displayName}</h3>
                     {/* <h3 style={{ color: 'Black' }}>Hello, {this.props.auth.uid}</h3> */}
                 </div>
-                <div class="container clearfix">
+                <div className="container clearfix">
                     <button className="float-right" style={{ height: '40px', width: '40px' }} onClick={() => this.handleLogOut()} >
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i className="fas fa-sign-out-alt"></i>
                     </button>
-                    <div class="people-list" id="people-list">
+                    <div className="people-list" id="people-list">
                   
                         <ListUsers />
                     </div>
-                    <div class="chat">
+                    <div className="chat">
                         <ChatHeader />
                         <ChatHistory  auth= {this.props.auth} idReceiver = {this.props.match.params.id}/>
                         <MessageInput auth= {this.props.auth} idReceiver = {this.props.match.params.id} />

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendMessage } from '../../store/Actions/message'
 import { updateLastChatUser } from '../../store/Actions/user'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faImage } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+library.add(faImage)
 class MessageInput extends Component {
     constructor(props) {
         super(props);
@@ -20,13 +24,13 @@ class MessageInput extends Component {
     }
     onHandleChooseImage = (e) => {
         let image = e.target.files[0];
-        
+
         let reader = new FileReader()
         reader.onloadend = () => {
             if (image) {
                 this.setState({
                     previewImage: [...this.state.previewImage, reader.result],
-                    listImages:  [...this.state.listImages, image],
+                    listImages: [...this.state.listImages, image],
                 })
             }
         }
@@ -72,11 +76,11 @@ class MessageInput extends Component {
         }
 
     }
-    onDelete = (index)=>{
+    onDelete = (index) => {
         let preImgs = this.state.previewImage;
-        preImgs.splice(index,1);
+        preImgs.splice(index, 1);
         let listImgs = this.state.listImages;
-        listImgs.splice(index,1);
+        listImgs.splice(index, 1);
         this.setState({
             previewImage: preImgs,
             listImages: listImgs,
@@ -92,22 +96,27 @@ class MessageInput extends Component {
         if (listPreviewImgs.length > 0) {
             listPreImgs = listPreviewImgs.map((preImg, index) => {
                 return (
-                    <div key = {index}>
-                        <button onClick={()=> this.onDelete(index)}>delete</button>
-                        <img src={preImg} />
+                    <div key={index} className="previewImages">
+                        <div className="Image">
+                            <button onClick={() => this.onDelete(index)} style={{ color: "red" }}>x</button>
+                            <img src={preImg} />
+                        </div>
                     </div>
 
                 )
             })
         }
         return (
-            <div class="chat-message clearfix">
+            <div className="chat-message clearfix">
                 <textarea name="message" value={this.state.message} onChange={this.onChange} onKeyDown={this.onHanleKey} id="message-to-send" placeholder="Type your message" rows="3"></textarea>
-                <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-file-image-o"></i>
-                <div className="inputfile" >
-                    <input type="file" id="file" accept="image/*" ref="fileUploader" onChange={(e) =>
-                        this.onHandleChooseImage(e)} />
+                <i className="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+                {/* <i className="fa fa-file-image-o"></i> */}
+
+                <div className="uploadImage" >
+                    <label htmlFor="file">
+                        <FontAwesomeIcon icon="image" size="2x" />
+                    </label>
+                    <input type="file" id="file" accept="image/*" ref="fileUploader" onChange={(e) => this.onHandleChooseImage(e)} />
                 </div>
                 {listPreImgs}
                 <button onClick={this.onSubmit} >Send</button>

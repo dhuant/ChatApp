@@ -74,11 +74,11 @@ class ListUser extends Component {
         }
         return (
             <div>
-                <div class="search">
+                <div className="search">
                     <input type="text" name="keyword" value={this.state.keyword} onChange={this.onChange} placeholder="search" />
-                    <i class="fa fa-search"></i>
+                    <i className="fa fa-search"></i>
                 </div>
-                <ul class="list">
+                <ul className="list">
                     {listUsers}
                 </ul>
             </div>

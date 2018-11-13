@@ -21,13 +21,13 @@ class ChatHeader extends Component {
         }
         return (
             
-            <div class="chat-header clearfix">
+            <div className="chat-header clearfix">
                 <img src={this.props.chatHeader.avatarUrl} width = '40px' height = '40px' alt="avatar" />
-                <div class="chat-about">
-                    <div class="chat-with">Chat with {this.props.chatHeader.displayName}</div>
+                <div className="chat-about">
+                    <div className="chat-with">Chat with {this.props.chatHeader.displayName}</div>
                     
                 </div>
-                <i class={starClass} onClick={() =>this.onClick(this.props.chatHeader.star)}></i>
+                <i className={starClass} onClick={() =>this.onClick(this.props.chatHeader.star)}></i>
             </div>
         );
     }
