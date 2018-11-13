@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 class User extends Component {
     onHandleOnClickUser = (uid) => {
-        // this.props.getUserFromFirebase(uid);
+        this.props.getUserFromFirebase(uid);
         let path = `/messenger/${uid}`;
         this.props.history.push(path);
     }
