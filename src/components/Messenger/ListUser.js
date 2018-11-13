@@ -20,7 +20,7 @@ class ListUser extends Component {
     }
 
     render() {
-        let users = this.props.users.ordered.users;
+        let users = this.props.users;
         // let priority =  users.find(this.props.uid);
         const idCurrent = this.props.uid;
         const index = _.findIndex(users, { 'key': idCurrent })
@@ -61,6 +61,7 @@ class ListUser extends Component {
         console.log(users);
         let listUsers = '';
         if (users) {
+            console.log(users);
             users = users.filter((user) => {
                 return user.value.displayName.toLowerCase().indexOf(this.state.keyword.toLowerCase()) !== -1;
             })
@@ -89,7 +90,7 @@ class ListUser extends Component {
 }
 const mapStateToProps = state => ({
     uid: state.firebase.auth.uid,
-    users: state.firebase,
+    users: state.firebase.ordered.users,
 })
 
 export default compose(firebaseConnect(['users']), connect(mapStateToProps))(ListUser)

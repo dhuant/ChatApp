@@ -89,8 +89,8 @@ class MessageInput extends Component {
     }
     render() {
 
-        console.log(this.state.previewImage);
-        console.log(this.state.listImages);
+        // console.log(this.state.previewImage);
+        // console.log(this.state.listImages);
         let listPreviewImgs = this.state.previewImage;
         let listPreImgs = null;
         if (listPreviewImgs.length > 0) {
